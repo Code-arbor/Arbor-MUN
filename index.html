@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbor MUN 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #9b59b6;
+            --primary-light: #b070d0;
+            --primary-dark: #8e44ad;
+            --secondary: #fcd34d;
+            --dark: #4a5568;
+            --light: #fdfefe;
+        }
+    
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #92979d;
+            color: #4A4A4A;
+            scroll-behavior: smooth;
+        }
+        
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+        }
+        
+        .btn-primary:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover:before {
+            left: 100%;
+        }
+        
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            bottom: -8px;
+            left: 20%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(176, 112, 208, 0.05) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card:hover:before {
+            opacity: 1;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+        
+        .pattern-dots {
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(176, 112, 208, 0.1) 100%);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--primary);
+        }
+        
+        input, select, textarea {
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+        }
+        
+        .success-message {
+            background-color: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+            border-radius: 0.75rem;
+        }
+        
+        .committee-tag, .delegation-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(155, 89, 182, 0.1);
+            color: var(--primary);
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            margin-right: 0.5rem; /* Added margin for spacing between tags */
+        }
+
+        .delegation-tag {
+            background-color: rgba(252, 211, 77, 0.2); /* A slightly different color for distinction */
+            color: #b070d0; /* Purple for distinction */
+        }
+
+        .background-guide-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .background-guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .schedule-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .schedule-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.3);
+        }
+        
+        .schedule-item:after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 16px;
+            bottom: -1.5rem;
+            width: 2px;
+            background: rgba(155, 89, 182, 0.2);
+        }
+        
+        .schedule-item:last-child:after {
+            display: none;
+        }
+        
+        .team-card {
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-card img {
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold text-gray-900 flex items-center">
+                    <span class="bg-gradient-to-r from-purple-500 to-indigo-400 text-transparent bg-clip-text">Arbor</span>
+                    <span class="ml-2">MUN 2025</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-purple-500">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-purple-500">About</a>
+                    <a href="#committees" class="nav-link text-gray-600 hover:text-purple-500">Committees</a>
+                    <a href="#background-guides" class="nav-link text-gray-600 hover:text-purple-500">Background Guides</a>
+                    <a href="#schedule" class="nav-link text-gray-600 hover:text-purple-500">Schedule</a>
+                    <a href="#team" class="nav-link text-gray-600 hover:text-purple-500">Facilitators</a>
+                    <a href="#register" class="btn-primary">Register Now</a>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="#home" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">Home</a>
+                    <a href="#about" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">About</a>
+                    <a href="#committees" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">Committees</a>
+                    <a href="#background-guides" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">Background Guides</a>
+                    <a href="#schedule" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">Schedule</a>
+                    <a href="#team" class="block px-3 py-2 rounded-md text-gray-600 hover:text-purple-500 hover:bg-gray-100">Facilitators</a>
+                    <a href="#register" class="block w-full mt-2 px-3 py-2 rounded-md bg-gradient-to-r from-purple-500 to-indigo-400 text-white text-center">Register Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero-gradient pattern-dots text-white py-20 md:py-32 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6 animate__animated animate__fadeInUp">
+                    Shaping <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">Your Tomorrow</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-100 mb-8 max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+                    Join us for an unforgettable Model United Nations experience at Arbor MUN 2025
+                </p>
+                <div class="animate__animated animate__fadeIn animate__delay-2s">
+                    <a href="#register" class="btn-primary inline-flex items-center px-8 py-3 text-lg font-semibold">
+                        Register Now
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">About Arbor MUN</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    The Social Science Department, with student organizers, proudly presents our school's Model United Nations (MUN) conference.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What is a Model United Nations (MUN)?</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        A Model United Nations (MUN) simulates global bodies, where students become diplomats or characters. They research, debate, and resolve pressing issues through negotiation and diplomacy.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Why Participate?</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        MUN develops critical thinking, public speaking, and leadership skills while fostering understanding of international relations and diplomacy.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card p-8 text-center">
+                    <div class="feature-icon mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Academic Development</h4>
+                    <p class="text-gray-600">
+                        Enhances understanding of political science, international relations, and global history while encouraging critical thinking.
+                    </p>
+                </div>
+                
+                <div class="card p-8 text-center">
+                    <div class="feature-icon mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Skill Building</h4>
+                    <p class="text-gray-600">
+                        Develops public speaking, debating and leadership skills while boosting confidence and research capabilities.
+                    </p>
+                </div>
+                
+                <div class="card p-8 text-center">
+                    <div class="feature-icon mx-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">Character Growth</h4>
+                    <p class="text-gray-600">
+                        Instils empathy by encouraging understanding of diverse perspectives and promotes collaboration.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="committees" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">Our Committees & Agendas</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Explore our diverse committees that cater to various interests and skill levels.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="card p-8">
+                    <div class="flex flex-wrap items-center mb-2">
+                        <div class="committee-tag">POLITICAL</div>
+                        <div class="delegation-tag">Single Delegation</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Lok Sabha</h3>
+                    <p class="text-gray-600 mb-6">
+                        Simulating the Indian Parliament, delegates act as Members of Parliament, debating national issues, reforms, and lawmaking within India's democratic context.
+                    </p>
+                    <div class="bg-purple-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 mb-2">Agenda:</h4>
+                        <p class="text-purple-600">
+                            Addressing the misuse of freedom of speech, with emphasis on the politicization of religion amidst communal tensions and terrorism in India.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card p-8">
+                    <div class="flex flex-wrap items-center mb-2">
+                        <div class="committee-tag">CRISIS</div>
+                        <div class="delegation-tag">Double Delegation</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">UNGA-ESS</h3>
+                    <p class="text-gray-600 mb-6">
+                        A dynamic, fast-paced crisis simulation. Delegates represent defence, intelligence, and administrative authorities, responding in real-time to evolving crises.
+                    </p>
+                    <div class="bg-purple-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 mb-2">Agenda:</h4>
+                        <p class="text-purple-600">
+                            Deliberation on the Situation in the Middle East Following the Suez Canal Nationalization,
+Freeze Date: 1 November 1956
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card md:col-span-2 p-8">
+                    <div class="flex flex-wrap items-center mb-2">
+                        <div class="committee-tag">FANTASY</div>
+                        <div class="delegation-tag">Double Delegation</div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">The Wizarding Council</h3>
+                    <p class="text-gray-600 mb-6">
+                        Set in J.K. Rowling's magical world, this imaginative committee lets students role-play characters like Dumbledore or Death Eaters. Delegates debate magical law, ministry reforms, and dark forces.
+                    </p>
+                    <div class="bg-purple-100 p-4 rounded-lg">
+                        <h4 class="font-semibold text-purple-700 mb-2">Agenda:</h4>
+                        <p class="text-purple-600">
+                            Regulation of Dark magic and Unforgivable Curses in the Post-Voldemort era. 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="background-guides" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">Background Guides</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Prepare for your committee with our comprehensive background guides. These documents provide essential information to help you research and excel in your role.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="background-guide-card text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Lok Sabha</h3>
+                    <p class="text-gray-600 mb-4">
+                        Download the background guide for the Lok Sabha committee to prepare for your debate on freedom of speech and communal tensions.
+                    </p>
+                    <a href="BACKGROUND GUIDE-LOK SABHA-1.pdf" download class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold">
+                        Download Guide
+                    </a>
+                </div>
+
+                <div class="background-guide-card text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">UNGA-ESS</h3>
+                    <p class="text-gray-600 mb-4">
+                        Access the background guide for UNGA-ESS to delve into the Suez Canal Nationalization crisis and prepare for real-time responses.
+                    </p>
+                    <a href="BACKGROUND GUIDE- UNGA-ESS.pdf" download class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold">
+                        Download Guide
+                    </a>
+                </div>
+
+                <div class="background-guide-card text-center">
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">The Wizarding Council</h3>
+                    <p class="text-gray-600 mb-4">
+                        Explore the magical world with the background guide for The Wizarding Council, focusing on dark magic regulation in the post-Voldemort era.
+                    </p>
+                    <a href="BACKGROUND GUIDE- WIZARDING COUNCIL.pdf" download class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold">
+                        Download Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="schedule" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">Conference Schedule</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Two days of intensive debate, collaboration, and diplomatic engagement.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="card p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Day 1 – August 22<sup>nd</sup></h3>
+                    
+                    <div class="space-y-6">
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">9:00 – 9:30 AM</h4>
+                            <p class="text-gray-600">Welcome Ceremony</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">9:30 – 10:30 AM</h4>
+                            <p class="text-gray-600">Committee Session I (Roll Call, GSL, Agenda Setting)</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">10:30 – 11:30 AM</h4>
+                            <p class="text-gray-600">Committee Session II (Moderated Caucus, Speeches)</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">11:30 – 11:45 AM</h4>
+                            <p class="text-gray-600">Refreshment Break</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">11:45 AM – 12:45 PM</h4>
+                            <p class="text-gray-600">Committee Session III (Debate continues, Working Paper introduced)</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">12:45 – 1:30 PM</h4>
+                            <p class="text-gray-600">Unmoderated Caucus / Draft Resolutions</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">1:30 – 2:00 PM</h4>
+                            <p class="text-gray-600">Day Wrap-Up, Press Briefing (if applicable)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Day 2 – August 23<sup>rd</sup></h3>
+                    
+                    <div class="space-y-6">
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">8:30 – 8:45 AM</h4>
+                            <p class="text-gray-600">Welcome Back & Recap of Day 1</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">8:45 – 10:45 AM</h4>
+                            <p class="text-gray-600">Committee Session IV (Resolution Debate)</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">10:45 – 11:00 AM</h4>
+                            <p class="text-gray-600">Final Voting on Draft Resolutions</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">11:00 – 11:45 AM</h4>
+                            <p class="text-gray-600">Closing Ceremony (Delegate Speeches + Awards)</p>
+                        </div>
+                        
+                        <div class="schedule-item">
+                            <h4 class="font-bold text-gray-800">11:45 AM – 12:00 PM</h4>
+                            <p class="text-gray-600">Group Photo, Feedback, Departure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-16 md:py-24 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">Your Facilitators</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Meet the team that makes Arbor MUN 2025 possible.
+                </p>
+            </div>
+            
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Executive Board (EB)</h3>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Chair</h4>
+                        <p class="text-gray-600">
+                            The Chair leads committee debates, ensuring rules are followed, discussions stay focused, and guiding delegates through resolution writing. They are the main facilitator.
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Vice-Chair</h4>
+                        <p class="text-gray-600">
+                            The Vice-Chair assists the Chair, handling procedural matters, managing speaking times, and ensuring committee decorum. They are the Chair's primary support.
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">International Press</h4>
+                        <p class="text-gray-600">
+                            The International Press acts as conference media, observing debates, interviewing delegates, and fact-checking points to add realism and external perspective.
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Rapporteur</h4>
+                        <p class="text-gray-600">
+                            The Rapporteur accurately documents committee progress, noting speeches, resolutions, and voting results. Their role is to provide a clear record and summary of all sessions.
+                        </p>
+                    </div>
+                </div>
+                
+                <h4 class="text-xl font-bold text-center text-gray-800 mb-8">Executive Board Members</h4>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                        <thead class="bg-purple-500 text-white">
+                            <tr>
+                                <th class="py-4 px-6 text-left">Committee</th>
+                                <th class="py-4 px-6 text-left">Chair</th>
+                                <th class="py-4 px-6 text-left">Vice Chair</th>
+                                <th class="py-4 px-6 text-left">International Press</th>
+                                <th class="py-4 px-6 text-left">Rapporteur</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-4 px-6">UNGA-ESS</td>
+                                <td class="py-4 px-6">NIMISH ANAND (10 C)</td>
+                                <td class="py-4 px-6">CLIVE NOAH (10 C)
+                                    CO: TYSHA SAI (10-A)
+                                </td>
+                                <td class="py-4 px-6">TRUSHNA SATHVIKA (10 C)</td>
+                                <td class="py-4 px-6">AKHILESH KADALI (10 C)</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-4 px-6">LOK SABHA</td>
+                                <td class="py-4 px-6">SATYA VIRAT (10 B)</td>
+                                <td class="py-4 px-6">SAI AADHAV (10 C)</td>
+                                <td class="py-4 px-6">ANANDI PANT (11 C)</td>
+                                <td class="py-4 px-6">ARUSH ANISHETTY (10 A)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-4 px-6">FANTASY</td>
+                                <td class="py-4 px-6">ABDUL FOZAIL (12 A)</td>
+                                <td class="py-4 px-6">HARINI NELGI (10 C)</td>
+                                <td class="py-4 px-6">NAGADIYTA B (10 C)</td>
+                                <td class="py-4 px-6">SHRIYAN SAILESH (10 A)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-8">Organizing Committee (OC)</h3>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Planning and Logistics</h4>
+                        <p class="text-gray-600">
+                            They handle venue booking, equipment, and registrations, ensuring all physical resources are ready.
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Administration and Operations</h4>
+                        <p class="text-gray-600">
+                            This involves crowd management, coordinating with schools and delegates, and handling all communication for smooth operations.
+                        </p>
+                    </div>
+                    
+                    <div class="card p-8">
+                        <h4 class="text-xl font-bold text-gray-800 mb-3">Delegate Experience</h4>
+                        <p class="text-gray-600">
+                            The OC focuses on delegate comfort and enjoyment, managing food, breaks, and social events for a positive experience.
+                        </p>
+                    </div>
+                </div>
+                
+                <h4 class="text-xl font-bold text-center text-gray-800 mb-8">Members of the Organizing Committee</h4>
+                
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="bg-white px-6 py-3 rounded-full shadow-sm">
+                        <p class="font-medium">Somesh Kumar (Lead)</p>
+                    </div>
+                    <div class="bg-white px-6 py-3 rounded-full shadow-sm">
+                        <p class="font-medium">Sri Karthik</p>
+                    </div>
+                    <div class="bg-white px-6 py-3 rounded-full shadow-sm">
+                        <p class="font-medium">Purvika Boyapati</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-gradient-to-r from-purple-500 to-indigo-400 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
+                Join Us and <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-amber-400">Make a Difference!</span>
+            </h2>
+            <p class="text-xl text-purple-100 max-w-3xl mx-auto mb-8">
+                Arbor MUN 2025 is more than just a conference; it's an opportunity to grow, lead, and connect. We believe in empowering every student to become a confident global citizen.
+            </p>
+            <a href="#register" class="btn-primary inline-flex items-center px-8 py-3 text-lg font-semibold">
+                Register Today
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <section id="register" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl section-title mb-4">Register for Arbor MUN 2025</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Fill out the form below to secure your spot at this year's conference!
+                </p>
+            </div>
+            
+            <div class="card p-8 md:p-10">
+                <form id="registrationForm" class="space-y-6">
+                    <div>
+                        <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="grade" class="block text-sm font-medium text-gray-700 mb-1">Grade</label>
+                            <input type="number" id="grade" name="grade" min="7" max="12" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                        </div>
+                        <div>
+                            <label for="section" class="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                            <input type="text" id="section" name="section" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                    </div>
+                    
+                    <div>
+                        <label for="committeePreference" class="block text-sm font-medium text-gray-700 mb-1">Committee Preference</label>
+                        <select id="committeePreference" name="committeePreference" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                            <option value="">Select a Committee</option>
+                            <option value="lokSabha">Lok Sabha</option>
+                            <option value="emergencyCommittee">UNGA-ESS</option>
+                            <option value="fantasyCommittee">Fantasy Committee – The Wizarding Council</option>
+                        </select>
+                    </div>
+                    
+                    <div id="partnerDetailsFields" class="space-y-6 hidden bg-purple-50 p-6 rounded-lg">
+                        <h4 class="text-lg font-semibold text-purple-700">Partner Details</h4>
+                        
+                        <div>
+                            <label for="partnerName" class="block text-sm font-medium text-gray-700 mb-1">Partner's Name</label>
+                            <input type="text" id="partnerName" name="partnerName"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                        </div>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="partnerGrade" class="block text-sm font-medium text-gray-700 mb-1">Partner's Grade</label>
+                                <input type="number" id="partnerGrade" name="partnerGrade" min="7" max="12"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                            </div>
+                            <div>
+                                <label for="partnerSection" class="block text-sm font-medium text-gray-700 mb-1">Partner's Section</label>
+                                <input type="text" id="partnerSection" name="partnerSection"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="secondaryEmail" class="block text-sm font-medium text-gray-700 mb-1">Secondary Email Address</label>
+                            <input type="email" id="secondaryEmail" name="secondaryEmail"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-purple-400">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="consent" name="consent" type="checkbox" required
+                                   class="h-4 w-4 text-purple-500 focus:ring-purple-400 border-gray-300 rounded">
+                        </div>
+                        <div class="ml-3">
+                            <label for="consent" class="text-sm text-gray-700">
+                                I agree to attend the Arbor MUN, come what may.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="btn-primary w-full py-3.5 text-lg font-semibold">
+                            Submit Registration
+                        </button>
+                    </div>
+                </form>
+                
+                <div id="thankYouMessage" class="hidden success-message p-6 mt-8">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-medium text-green-800">Thank You for Registering!</h3>
+                            <div class="mt-2 text-sm text-green-700">
+                                <p>Your registration details have been successfully submitted. We look forward to seeing you at Arbor MUN 2025!</p>
+                            </div>
+                            <div id="submittedDetails" class="mt-4 text-sm text-gray-700 space-y-2">
+                                <p><span class="font-semibold">Name:</span> <span id="displayFullName"></span></p>
+                                <p><span class="font-semibold">Grade:</span> <span id="displayGrade"></span></p>
+                                <p><span class="font-semibold">Section:</span> <span id="displaySection"></span></p>
+                                <p><span class="font-semibold">Email:</span> <span id="displayEmail"></span></p>
+                                <p><span class="font-semibold">Committee Preference:</span> <span id="displayCommitteePreference"></span></p>
+                                <div id="displayPartnerDetails" class="mt-3 pt-3 border-t border-gray-200 hidden">
+                                    <p class="font-semibold mb-2">Partner Details:</p>
+                                    <p><span class="font-semibold">Partner Name:</span> <span id="displayPartnerName"></span></p>
+                                    <p><span class="font-semibold">Partner Grade:</span> <span id="displayPartnerGrade"></span></p>
+                                    <p><span class="font-semibold">Partner Section:</span> <span id="displayPartnerSection"></span></p>
+                                    <p><span class="font-semibold">Secondary Email:</span> <span id="displaySecondaryEmail"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-gray-200 py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <a href="#" class="text-2xl font-bold text-white flex items-center justify-center">
+                    <span class="bg-gradient-to-r from-purple-300 to-indigo-300 text-transparent bg-clip-text">Arbor</span>
+                    <span class="ml-2">MUN 2025</span>
+                </a>
+                
+                <p class="mt-6 max-w-2xl mx-auto">
+                    We are confident that Arbor MUN 2025 will stand out as a flagship event, celebrating the innovation, skills, and aspirations of our students.
+                </p>
+                
+                <p class="mt-8 text-sm text-gray-300">
+                    &copy; 2025 Arbor MUN 
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('open');
+            });
+            
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                        
+                        
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.remove('open');
+                        }
+                    }
+                });
+            });
+            
+            
+            const committeePreference = document.getElementById('committeePreference');
+            const partnerDetailsFields = document.getElementById('partnerDetailsFields');
+            
+            function togglePartnerDetailsFields() {
+                if (committeePreference.value === 'fantasyCommittee' || committeePreference.value === 'emergencyCommittee') {
+                    partnerDetailsFields.classList.remove('hidden');
+                    
+                    document.getElementById('partnerName').required = true;
+                    document.getElementById('partnerGrade').required = true;
+                    document.getElementById('partnerSection').required = true;
+                    document.getElementById('secondaryEmail').required = true;
+                } else {
+                    partnerDetailsFields.classList.add('hidden');
+                    
+                    document.getElementById('partnerName').required = false;
+                    document.getElementById('partnerGrade').value = '';
+                    document.getElementById('partnerSection').value = '';
+                    document.getElementById('secondaryEmail').value = '';
+                }
+            }
+            
+            committeePreference.addEventListener('change', togglePartnerDetailsFields);
+            
+            
+            togglePartnerDetailsFields();
+            
+            
+            const registrationForm = document.getElementById('registrationForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            
+            registrationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                
+                const fullName = document.getElementById('fullName').value;
+                const grade = document.getElementById('grade').value;
+                const section = document.getElementById('section').value;
+                const email = document.getElementById('email').value;
+                const selectedCommittee = committeePreference.options[committeePreference.selectedIndex].text;
+                
+                
+                document.getElementById('displayFullName').textContent = fullName;
+                document.getElementById('displayGrade').textContent = grade;
+                document.getElementById('displaySection').textContent = section;
+                document.getElementById('displayEmail').textContent = email;
+                document.getElementById('displayCommitteePreference').textContent = selectedCommittee;
+                
+                
+                if (committeePreference.value === 'fantasyCommittee' || committeePreference.value === 'emergencyCommittee') {
+                    document.getElementById('displayPartnerDetails').classList.remove('hidden');
+                    document.getElementById('displayPartnerName').textContent = document.getElementById('partnerName').value;
+                    document.getElementById('displayPartnerGrade').textContent = document.getElementById('partnerGrade').value;
+                    document.getElementById('displayPartnerSection').textContent = document.getElementById('partnerSection').value;
+                    document.getElementById('displaySecondaryEmail').textContent = document.getElementById('secondaryEmail').value;
+                } else {
+                    document.getElementById('displayPartnerDetails').classList.add('hidden');
+                }
+                
+                
+                registrationForm.classList.add('hidden');
+                thankYouMessage.classList.remove('hidden');
+                
+                
+                thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
