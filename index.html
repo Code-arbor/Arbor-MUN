@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+       
+        function openPDF(pdfUrl) 
+            {
+                //const pdfUrl = '/files/sample.pdf'; // URL to your hosted PDF
+                window.open(pdfUrl, '_blank', 'width=800,height=600');
+            }
+</script>
+
     <style>
         :root {
             --primary: #9b59b6;
@@ -471,7 +480,7 @@ Freeze Date: 1 November 1956
         <p class="text-gray-600 mb-4">
           View the background guide for the Lok Sabha committee to prepare for your debate on freedom of speech and communal tensions.
         </p>
-        <a href="bg-lok-sabha.pdf" target="_blank" class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold">
+        <a href="bg-lok-sabha.pdf" target="_blank" class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold" onclick=showPDF("bg-lok-sabha.pdf")>
           View Guide
         </a>
       </div>
@@ -481,7 +490,7 @@ Freeze Date: 1 November 1956
         <p class="text-gray-600 mb-4">
           Access the background guide for UNGA-ESS to delve into the Suez Canal Nationalization crisis and prepare for real-time responses.
         </p>
-        <a href="bg-unga-ess.pdf" target="_blank" class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold">
+        <a href="bg-unga-ess.pdf" target="_blank" class="btn-primary inline-block px-6 py-2 mt-2 text-sm font-semibold" onclick=showPDF("bg-unga-ess.pdf")>
           View Guide
         </a>
       </div>
